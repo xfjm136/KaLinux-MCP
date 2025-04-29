@@ -2,169 +2,6 @@
 
 [English](#english) | [中文](#chinese)
 
-<a name="english"></a>
-
-## Overview
-
-Kali Linux Terminal Control MCP is a Multi-Channel Protocol (MCP) implementation that allows convenient API access to various Kali Linux security tools and basic Linux commands. This project enables easy automation of security testing and assessment processes through a standardized API interface.
-
-## Features
-
-- Execute basic Linux shell commands
-- Run network scanning with Nmap
-- Execute Metasploit commands
-- Utilize Aircrack-ng wireless tools
-- Launch and control Burp Suite
-- Perform SQL injection scanning with SQLMap
-- Conduct password cracking with Hydra
-- Execute web server scanning with Nikto
-- Analyze WordPress sites with WPScan
-- Crack passwords with John the Ripper
-
-## Installation
-
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/xfjm136/KaLinux-MCP.git
-   cd KaLinux-MCP
-   ```
-
-2. Install dependencies:
-   ```bash
-   pip install fastmcp
-   ```
-
-3. Ensure you have Kali Linux with the necessary security tools installed.
-
-## Usage
-
-1. Start the MCP server:
-   ```bash
-   python kalinux_mcp.py
-   ```
-
-2. The server will start on port 8010 by default, using Server-Sent Events (SSE) as the transport protocol.
-
-3. Connect to the MCP server from your client application to call the various tools.
-
-## File Structure
-
-- `tmp/`: Directory for temporary files and command outputs
-- `log/`: Directory for log files
-- Both directories are automatically created in the same location as the script
-
-## API Reference
-
-### Shell Command
-
-Execute basic shell commands:
-
-```python
-shell_command(command: str, timeout: int = 600) -> str
-```
-
-### Nmap Scan
-
-Perform network scanning with Nmap:
-
-```python
-nmap_scan(target: str, nmap_args: List[str] = [], timeout: int = 600) -> str
-```
-
-### Metasploit Command
-
-Execute commands in the Metasploit Framework:
-
-```python
-metasploit_command(msf_command: str, timeout: int = 600) -> str
-```
-
-### Aircrack-ng
-
-Use Aircrack-ng for wireless network operations:
-
-```python
-aircrack_ng(interface: str, operation: str, args: List[str] = [], timeout: int = 600) -> str
-```
-
-### Burp Suite
-
-Control Burp Suite:
-
-```python
-burpsuite(action: str = "start") -> str
-```
-
-### SQLMap Scan
-
-Perform SQL injection scanning:
-
-```python
-sqlmap_scan(url: str, sqlmap_args: List[str] = [], timeout: int = 1200) -> str
-```
-
-### Hydra Attack
-
-Conduct password cracking attacks:
-
-```python
-hydra_attack(target: str, service: str, userlist: str, passlist: str, additional_args: List[str] = [], timeout: int = 1800) -> str
-```
-
-### Nikto Scan
-
-Scan web servers for vulnerabilities:
-
-```python
-nikto_scan(target: str, nikto_args: List[str] = [], timeout: int = 600) -> str
-```
-
-### WPScan
-
-Scan WordPress sites:
-
-```python
-wpscan(target: str, wpscan_args: List[str] = [], timeout: int = 600) -> str
-```
-
-### John the Ripper
-
-Crack passwords:
-
-```python
-john_crack(password_file: str, wordlist: Optional[str] = None, john_args: List[str] = [], timeout: int = 1200) -> str
-```
-
-## Configuration
-
-- Default timeout for commands is set to 600 seconds (10 minutes)
-- For intensive operations like password cracking, timeout is increased by default
-- All output files are saved to the `tmp/` directory with timestamp-based naming
-- Log files are saved to the `log/` directory
-
-## Example Code
-
-```python
-from fastmcp import FastMCPClient
-
-# Connect to the MCP server
-client = FastMCPClient("http://localhost:8010/sse")
-
-# Run a simple Nmap scan
-result = client.call("nmap_scan", {"target": "192.168.1.1", "nmap_args": ["-p", "1-1000"]})
-print(result)
-
-# Execute a Metasploit command
-result = client.call("metasploit_command", {"msf_command": "use auxiliary/scanner/ssh/ssh_login"})
-print(result)
-```
-
-## License
-
-[MIT License](LICENSE)
-
----
-
 <a name="chinese"></a>
 
 # Kali Linux 终端控制 MCP
@@ -323,7 +160,163 @@ print(result)
 result = client.call("metasploit_command", {"msf_command": "use auxiliary/scanner/ssh/ssh_login"})
 print(result)
 ```
+---
 
-## 许可证
+<a name="english"></a>
 
-[MIT License](LICENSE)
+## Overview
+
+Kali Linux Terminal Control MCP is a Multi-Channel Protocol (MCP) implementation that allows convenient API access to various Kali Linux security tools and basic Linux commands. This project enables easy automation of security testing and assessment processes through a standardized API interface.
+
+## Features
+
+- Execute basic Linux shell commands
+- Run network scanning with Nmap
+- Execute Metasploit commands
+- Utilize Aircrack-ng wireless tools
+- Launch and control Burp Suite
+- Perform SQL injection scanning with SQLMap
+- Conduct password cracking with Hydra
+- Execute web server scanning with Nikto
+- Analyze WordPress sites with WPScan
+- Crack passwords with John the Ripper
+
+## Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/xfjm136/KaLinux-MCP.git
+   cd KaLinux-MCP
+   ```
+
+2. Install dependencies:
+   ```bash
+   pip install fastmcp
+   ```
+
+3. Ensure you have Kali Linux with the necessary security tools installed.
+
+## Usage
+
+1. Start the MCP server:
+   ```bash
+   python kalinux_mcp.py
+   ```
+
+2. The server will start on port 8010 by default, using Server-Sent Events (SSE) as the transport protocol.
+
+3. Connect to the MCP server from your client application to call the various tools.
+
+## File Structure
+
+- `tmp/`: Directory for temporary files and command outputs
+- `log/`: Directory for log files
+- Both directories are automatically created in the same location as the script
+
+## API Reference
+
+### Shell Command
+
+Execute basic shell commands:
+
+```python
+shell_command(command: str, timeout: int = 600) -> str
+```
+
+### Nmap Scan
+
+Perform network scanning with Nmap:
+
+```python
+nmap_scan(target: str, nmap_args: List[str] = [], timeout: int = 600) -> str
+```
+
+### Metasploit Command
+
+Execute commands in the Metasploit Framework:
+
+```python
+metasploit_command(msf_command: str, timeout: int = 600) -> str
+```
+
+### Aircrack-ng
+
+Use Aircrack-ng for wireless network operations:
+
+```python
+aircrack_ng(interface: str, operation: str, args: List[str] = [], timeout: int = 600) -> str
+```
+
+### Burp Suite
+
+Control Burp Suite:
+
+```python
+burpsuite(action: str = "start") -> str
+```
+
+### SQLMap Scan
+
+Perform SQL injection scanning:
+
+```python
+sqlmap_scan(url: str, sqlmap_args: List[str] = [], timeout: int = 1200) -> str
+```
+
+### Hydra Attack
+
+Conduct password cracking attacks:
+
+```python
+hydra_attack(target: str, service: str, userlist: str, passlist: str, additional_args: List[str] = [], timeout: int = 1800) -> str
+```
+
+### Nikto Scan
+
+Scan web servers for vulnerabilities:
+
+```python
+nikto_scan(target: str, nikto_args: List[str] = [], timeout: int = 600) -> str
+```
+
+### WPScan
+
+Scan WordPress sites:
+
+```python
+wpscan(target: str, wpscan_args: List[str] = [], timeout: int = 600) -> str
+```
+
+### John the Ripper
+
+Crack passwords:
+
+```python
+john_crack(password_file: str, wordlist: Optional[str] = None, john_args: List[str] = [], timeout: int = 1200) -> str
+```
+
+## Configuration
+
+- Default timeout for commands is set to 600 seconds (10 minutes)
+- For intensive operations like password cracking, timeout is increased by default
+- All output files are saved to the `tmp/` directory with timestamp-based naming
+- Log files are saved to the `log/` directory
+
+## Example Code
+
+```python
+from fastmcp import FastMCPClient
+
+# Connect to the MCP server
+client = FastMCPClient("http://localhost:8010/sse")
+
+# Run a simple Nmap scan
+result = client.call("nmap_scan", {"target": "192.168.1.1", "nmap_args": ["-p", "1-1000"]})
+print(result)
+
+# Execute a Metasploit command
+result = client.call("metasploit_command", {"msf_command": "use auxiliary/scanner/ssh/ssh_login"})
+print(result)
+```
+---
+
