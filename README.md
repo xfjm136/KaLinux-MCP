@@ -1,6 +1,6 @@
 # Kali Linux Terminal Control MCP
 
-| [中文](#chinese)|[English](#english) |
+|[中文](#chinese)|[English](#english) 
 
 <a name="chinese"></a>
 
